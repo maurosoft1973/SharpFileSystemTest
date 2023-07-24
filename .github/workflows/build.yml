@@ -1,0 +1,37 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+env:
+  NET_VERSION: '7.x'
+
+jobs:
+  build_test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+
+    - name: Setup .NET SDK ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+        dotnet-quality: 'ga'
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Test
+      run: |
+          dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+          ls -la ./tests/SharpFileSystem.Tests/
