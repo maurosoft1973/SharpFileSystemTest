@@ -2,6 +2,7 @@
 
 [![Lint Code Base](https://github.com/maurosoft1973/SharpFileSystem/actions/workflows/linter.yml/badge.svg)](https://github.com/maurosoft1973/SharpFileSystem/actions/workflows/linter.yml)
 [![CodeQL](https://github.com/maurosoft1973/SharpFileSystem/actions/workflows/codeql.yml/badge.svg)](https://github.com/maurosoft1973/SharpFileSystem/actions/workflows/codeql.yml)
+[![Codecov](https://codecov.io/gh/maurosoft1973/SharpFileSystemTest/branch/master/graph/badge.svg?token=Y3nzCNUf1w)](https://codecov.io/gh/maurosoft1973/SharpFileSystemTest)
 [![NuGet](https://img.shields.io/nuget/v/Maurosoft.SharpFileSystem.svg?style=flat-square)](https://www.nuget.org/packages/Maurosoft.SharpFileSystem)
 [![Nuget](https://img.shields.io/nuget/dt/Maurosoft.SharpFileSystem)](https://www.nuget.org/packages/Maurosoft.SharpFileSystem)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/maurosoft1973/SharpFileSystem/blob/master/LICENSE.txt)
