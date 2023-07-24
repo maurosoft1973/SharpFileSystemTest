@@ -2,7 +2,9 @@ name: Publish SharpFileSystem SevenZip on NuGet
 
 on:
   push:
-    branches: [ release ]
+    branches: [ master ]
+    tags:
+      - 'v1.*'
     paths: [ 'src/SharpFileSystem.SevenZip/**' ]
   workflow_dispatch:
 

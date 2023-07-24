@@ -31,11 +31,13 @@ namespace SharpFileSystem
                             destinationStream.Write(buffer, 0, readBytes);
                     }
                 }
+
                 source.Delete(sourcePath);
             }
             else
             {
                 destination.CreateDirectory(destinationPath);
+
                 foreach (var ep in source.GetEntities(sourcePath).ToArray())
                 {
                     var destinationEntityPath = ep.IsFile
@@ -43,6 +45,7 @@ namespace SharpFileSystem
                                                     : destinationPath.AppendDirectory(ep.EntityName);
                     Move(source, ep, destination, destinationEntityPath);
                 }
+
                 if (!sourcePath.IsRoot)
                     source.Delete(sourcePath);
             }
