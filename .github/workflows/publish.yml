@@ -72,7 +72,7 @@ jobs:
       with:
         repo_token: ${{ github.token }}
         file: nuget-packages/${{ env.ARTIFACT_SHARPFILESYSTEM_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
-        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_NAME }}.nuget
+        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nuget
         tag: ${{ github.ref }}
 
     - name: Upload Nuget Package ${{ env.ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
@@ -80,7 +80,7 @@ jobs:
       with:
         repo_token: ${{ github.token }}
         file: nuget-packages/${{ env.ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
-        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME }}.nuget
+        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nuget
         tag: ${{ github.ref }}
 
     - name: Upload Nuget Package ${{ env.ARTIFACT_SHARPFILESYSTEM_SEVENZIP_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
@@ -88,7 +88,7 @@ jobs:
       with:
         repo_token: ${{ github.token }}
         file: nuget-packages/${{ env.ARTIFACT_SHARPFILESYSTEM_SEVENZIP_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
-        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_SEVENZIP_NAME }}.nuget
+        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_SEVENZIP_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nuget
         tag: ${{ github.ref }}
 
     - name: Upload Nuget Package ${{ env.ARTIFACT_SHARPFILESYSTEM_SHARPZIPLIB_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
@@ -96,5 +96,5 @@ jobs:
       with:
         repo_token: ${{ github.token }}
         file: nuget-packages/${{ env.ARTIFACT_SHARPFILESYSTEM_SHARPZIPLIB_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
-        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_SHARPZIPLIB_NAME }}.nuget
+        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_SHARPZIPLIB_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nuget
         tag: ${{ github.ref }}
