@@ -58,7 +58,7 @@ jobs:
       uses: actions/create-release@v1
       id: creatre_release
       env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
       with:
           tag_name: ${{ env.TAG_NAME }}_v${{ env.GITVERSION_NUGETVERSIONV2 }}
           release_name: ${{ env.RELEASE_NAME }} ${{ env.GITVERSION_NUGETVERSIONV2 }}
