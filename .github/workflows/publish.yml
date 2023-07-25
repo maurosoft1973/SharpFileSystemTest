@@ -42,7 +42,7 @@ jobs:
     - name: Display GitVersion outputs (step output)
       run: |
           echo "NuGetVersionV2: ${{ steps.gitversion.outputs.NuGetVersionV2 }}"
-          echo "::set-output name=NuGetVersionV2::${{ steps.gitversion.outputs.NuGetVersionV2 }}"
+          echo "NuGetVersionV2=${{ steps.gitversion.outputs.NuGetVersionV2 }}" >> $GITHUB_OUTPUT
 
     - name: Build (dotnet)
       run: dotnet build --configuration Release ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }}
@@ -51,7 +51,10 @@ jobs:
       run: dotnet test --no-restore --verbosity normal ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }}
 
     - name: Pack (dotnet)
-      run: dotnet pack ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }} --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersionV2 }}
+      run: |
+          echo NuGetVersionV2
+          echo steps.gitversion.outputs.NuGetVersionV2
+          dotnet pack ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }} --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersionV2 }}
 
     - name: View Pack
       run: ls -la ./nuget-packages/*.nupkg
