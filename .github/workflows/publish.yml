@@ -1,18 +1,18 @@
-name: Publish SharpFileSystem on NuGet
+name: Publish on NuGet
 
 on:
   push:
     tags:
       - 'v*'
-    paths: [ 'src/SharpFileSystem/**' ]
-  workflow_dispatch:
+    paths: [ 'src/**' ]
 
 env:
   NET_VERSION: '7.x'
-  PROJECT_NAME: src/SharpFileSystem
-  PROJECT_FILE: SharpFileSystem.csproj
   RELEASE_NAME: SharpFileSystem
-  ARTIFACT_NAME: Maurosoft.SharpFileSystem
+  ARTIFACT_SHARPFILESYSTEM_NAME: Maurosoft.SharpFileSystem
+  ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME: Maurosoft.SharpFileSystem.Resources
+  ARTIFACT_SHARPFILESYSTEM_SEVENZIP_NAME: Maurosoft.SharpFileSystem.SevenZip
+  ARTIFACT_SHARPFILESYSTEM_SHARPZIPLIB_NAME: Maurosoft.SharpFileSystem.SharpZipLib
 
 jobs:
   publish:
@@ -45,14 +45,16 @@ jobs:
           echo "NuGetVersionV2: ${{ steps.gitversion.outputs.NuGetVersionV2 }}"
 
     - name: Build (dotnet)
-      run: dotnet build --configuration Release ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }}
+      run: |
+          dotnet build --configuration Release
 
     - name: Test (dotnet)
-      run: dotnet test --no-restore --verbosity normal ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }}
+      run: |
+          dotnet test --no-restore --verbosity normal
 
     - name: Pack (dotnet)
       run: |
-          dotnet pack ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }} --output nuget-packages --configuration Release -p:PackageVersion=${{ env.GITVERSION_NUGETVERSIONV2 }}
+          dotnet pack --output nuget-packages --configuration Release -p:PackageVersion=${{ env.GITVERSION_NUGETVERSIONV2 }}
 
     - name: Create release
       uses: actions/create-release@v1
@@ -65,10 +67,34 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Upload binaries to release
+    - name: Upload Nuget Package ${{ env.ARTIFACT_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ github.token }}
         file: nuget-packages/${{ env.ARTIFACT_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
         asset_name: ${{ env.ARTIFACT_NAME }}.nuget
+        tag: ${{ github.ref }}
+
+    - name: Upload Nuget Package ${{ env.ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ github.token }}
+        file: nuget-packages/${{ env.ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
+        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME }}.nuget
+        tag: ${{ github.ref }}
+
+    - name: Upload Nuget Package ${{ env.ARTIFACT_SHARPFILESYSTEM_SEVENZIP_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ github.token }}
+        file: nuget-packages/${{ env.ARTIFACT_SHARPFILESYSTEM_SEVENZIP_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
+        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_SEVENZIP_NAME }}.nuget
+        tag: ${{ github.ref }}
+
+    - name: Upload Nuget Package ${{ env.ARTIFACT_SHARPFILESYSTEM_SHARPZIPLIB_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ github.token }}
+        file: nuget-packages/${{ env.ARTIFACT_SHARPFILESYSTEM_SHARPZIPLIB_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
+        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_SHARPZIPLIB_NAME }}.nuget
         tag: ${{ github.ref }}
