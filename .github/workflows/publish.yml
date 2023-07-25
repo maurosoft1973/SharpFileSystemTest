@@ -67,12 +67,12 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Upload Nuget Package ${{ env.ARTIFACT_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
+    - name: Upload Nuget Package ${{ env.ARTIFACT_SHARPFILESYSTEM_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ github.token }}
-        file: nuget-packages/${{ env.ARTIFACT_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
-        asset_name: ${{ env.ARTIFACT_NAME }}.nuget
+        file: nuget-packages/${{ env.ARTIFACT_SHARPFILESYSTEM_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
+        asset_name: ${{ env.ARTIFACT_SHARPFILESYSTEM_NAME }}.nuget
         tag: ${{ github.ref }}
 
     - name: Upload Nuget Package ${{ env.ARTIFACT_SHARPFILESYSTEM_RESOURCE_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }} to release
