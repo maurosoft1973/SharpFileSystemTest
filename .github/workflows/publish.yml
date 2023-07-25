@@ -54,8 +54,20 @@ jobs:
       run: |
           dotnet pack ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }} --output nuget-packages --configuration Release -p:PackageVersion=${{ env.GITVERSION_NUGETVERSIONV2 }}
 
-    - name : Upload Nuget file
-      uses: actions/upload-artifact@v1
+    - name: Create release
+      uses: actions/create-release@v1
+      id: creatre_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       with:
-        name: apk
-        path: nuget-packages/${{ env.ARTIFACT_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
+          tag_name: ${{ env.TAG_NAME }}_v${{ env.GITVERSION_NUGETVERSIONV2 }}
+          release_name: ${{ env.RELEASE_NAME }} ${{ env.GITVERSION_NUGETVERSIONV2 }}
+          draft: false
+          prerelease: false
+
+    - name : Upload Nuget file
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: nuget-packages/${{ env.ARTIFACT_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
+        asset_name: ${{ env.ARTIFACT_NAME }}.nuget
