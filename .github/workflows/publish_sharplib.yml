@@ -2,9 +2,8 @@ name: Publish SharpFileSystem SharpZipLib on NuGet
 
 on:
   push:
-    branches: [ master ]
     tags:
-      - 'v1*'
+      - 'z*'
     paths: [ 'src/SharpFileSystem.SharpZipLib/**' ]
   workflow_dispatch:
 

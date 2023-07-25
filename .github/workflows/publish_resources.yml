@@ -2,9 +2,8 @@ name: Publish SharpFileSystem Resources on NuGet
 
 on:
   push:
-    branches: [ master ]
     tags:
-      - 'v1*'
+      - 'z*'
     paths: [ 'src/SharpFileSystem.Resources/**' ]
   workflow_dispatch:
 
