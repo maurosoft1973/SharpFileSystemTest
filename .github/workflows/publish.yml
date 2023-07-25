@@ -12,6 +12,7 @@ env:
   PROJECT_NAME: src/SharpFileSystem
   PROJECT_FILE: SharpFileSystem.csproj
   RELEASE_NAME: SharpFileSystem
+  ARTIFACT_NAME: Maurosoft.SharpFileSystem
 
 jobs:
   publish:
@@ -53,5 +54,8 @@ jobs:
       run: |
           dotnet pack ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }} --output nuget-packages --configuration Release -p:PackageVersion=${{ env.GITVERSION_NUGETVERSIONV2 }}
 
-    - name: View Pack
-      run: ls -la ./nuget-packages/*.nupkg
+    - name : Upload Nuget file
+      uses: actions/upload-artifact@v1
+      with:
+        name: apk
+        path: nuget-packages/${{ env.ARTIFACT_NAME }}.${{ env.GITVERSION_NUGETVERSIONV2 }}.nupkg
