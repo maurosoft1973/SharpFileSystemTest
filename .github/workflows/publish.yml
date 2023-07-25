@@ -51,7 +51,6 @@ jobs:
 
     - name: Pack (dotnet)
       run: |
-          echo ${{ env.GITVERSION_NUGETVERSIONV2 }}
           dotnet pack ${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }} --output nuget-packages --configuration Release -p:PackageVersion=${{ env.GITVERSION_NUGETVERSIONV2 }}
 
     - name: View Pack

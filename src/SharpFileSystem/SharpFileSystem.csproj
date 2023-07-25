@@ -18,12 +18,11 @@
         <RepositoryUrl>https://github.com/maurosoft1973/sharpfilesystem</RepositoryUrl>
         <PackageProjectUrl>https://github.com/maurosoft1973/sharpfilesystem</PackageProjectUrl>
         <PackageTags>vfs sharpfilesystem</PackageTags>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>Maurosoft.SharpFileSystem</PackageId>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageIcon>icon.png</PackageIcon>
         <PackageIconUrl />
-        <Version>1.0.0</Version>
+        <PackageVersion>1.0.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
